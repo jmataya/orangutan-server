@@ -3,4 +3,9 @@ FactoryGirl.define do
 		sequence(:name) { |n| "Person #{n}" }
 		sequence(:email) { |n| "person_#{n}@test.com" }
 	end
+
+	factory :workspace do
+		sequence(:name) { |n| "Workspace #{n}" }
+		sequence(:description) { |n| "Test Description #{n}" }
+	end
 end

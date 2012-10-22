@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121021184235) do
+ActiveRecord::Schema.define(:version => 20121022062611) do
+
+  create_table "user_workspace_relationships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "workspace_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "user_workspace_relationships", ["user_id", "workspace_id"], :name => "index_user_workspace_relationships_on_user_id_and_workspace_id"
+  add_index "user_workspace_relationships", ["user_id"], :name => "index_user_workspace_relationships_on_user_id"
+  add_index "user_workspace_relationships", ["workspace_id"], :name => "index_user_workspace_relationships_on_workspace_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

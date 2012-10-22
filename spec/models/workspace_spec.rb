@@ -37,4 +37,17 @@ describe Workspace do
   	before { @workspace.description = "a" * 10000 }
   	it { should be_valid }
   end
+
+  describe "adding a user" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    before do
+      @workspace.save
+      @workspace.user_workspace_relationships.create!(user_id: user.id)
+    end
+
+    it "should have the user linked to it" do
+      @workspace.users.should == [user]
+    end
+  end
 end

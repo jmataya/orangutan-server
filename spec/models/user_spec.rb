@@ -64,4 +64,16 @@ describe User do
 		it { should_not be_valid }
 	end
 
+	describe "add a workspace" do
+		let(:workspace) { FactoryGirl.create(:workspace) }
+
+		before do
+			@user.save
+			@user.user_workspace_relationships.create!(workspace_id: workspace.id)
+		end
+
+		it "should have the workspace" do
+			@user.workspaces.should == [workspace]
+		end
+	end
 end
