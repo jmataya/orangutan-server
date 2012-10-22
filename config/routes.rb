@@ -1,7 +1,7 @@
 OrangutanServer::Application.routes.draw do
-  resources :users do
-    resources :workspaces
-  end
+	resources :tasks
+  resources :users
+  resources :workspaces
 
   root to: 'static_pages#home'
 end

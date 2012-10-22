@@ -4,17 +4,17 @@ class WorkspacesController < ApplicationController
 	respond_to :json
 	
 	def index
-		@user = User.find(params[:user_id])
+		@user = User.find(params[:uid])
 		respond_with @user.workspaces
 	end
 
 	def show
-		@user = User.find(params[:user_id])
+		@user = User.find(params[:uid])
 		respond_with @user.workspaces.find_by_id(params[:id])
 	end
 
 	def create
-		@user = User.find_by_id(params[:user_id])
+		@user = User.find_by_id(params[:uid])
 		@workspace = Workspace.new(params[:workspace])
 
 		if @workspace.save
