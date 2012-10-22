@@ -8,4 +8,8 @@ FactoryGirl.define do
 		sequence(:name) { |n| "Workspace #{n}" }
 		sequence(:description) { |n| "Test Description #{n}" }
 	end
+
+	factory :task do
+		sequence(:title) { |n| "Task #{n}" }
+	end
 end

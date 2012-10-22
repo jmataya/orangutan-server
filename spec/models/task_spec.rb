@@ -8,6 +8,7 @@ describe Task do
   it { should respond_to(:description) }
   it { should respond_to(:due_date) }
   it { should respond_to(:completed) }
+  it { should respond_to(:users) }
 
   it { should be_valid }
   it { should_not be_completed }
@@ -40,5 +41,18 @@ describe Task do
   describe "when description is at the maximum length" do
   	before { @task.description = "a" * 10000 }
   	it { should be_valid }
+  end
+
+  describe "adding an assigned user" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    before do
+      @task.save
+      @task.assigned_tasks.create!(user_id: user.id)
+    end
+
+    it "should have the user as an assigned user" do
+      @task.users.should == [user]
+    end
   end
 end

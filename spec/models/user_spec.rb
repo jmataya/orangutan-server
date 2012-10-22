@@ -7,6 +7,7 @@ describe User do
 
 	it { should respond_to(:name) }
 	it { should respond_to(:email) }
+	it { should respond_to(:tasks) }
 	it { should be_valid }
 
 	describe "when name is not present" do
@@ -74,6 +75,19 @@ describe User do
 
 		it "should have the workspace" do
 			@user.workspaces.should == [workspace]
+		end
+	end
+
+	describe "add a task" do
+		let(:task) { FactoryGirl.create(:task) }
+
+		before do
+			@user.save
+			@user.assigned_tasks.create!(task_id: task.id)
+		end
+
+		it "should have the task" do
+			@user.tasks.should == [task]
 		end
 	end
 end
