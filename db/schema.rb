@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022221309) do
+ActiveRecord::Schema.define(:version => 20121022222919) do
 
   create_table "assigned_tasks", :force => true do |t|
     t.integer  "user_id"
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(:version => 20121022221309) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "workspace_task_relationships", :force => true do |t|
+    t.integer  "workspace_id"
+    t.integer  "task_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "workspace_task_relationships", ["task_id"], :name => "index_workspace_task_relationships_on_task_id"
+  add_index "workspace_task_relationships", ["workspace_id", "task_id"], :name => "index_workspace_task_relationships_on_workspace_id_and_task_id"
+  add_index "workspace_task_relationships", ["workspace_id"], :name => "index_workspace_task_relationships_on_workspace_id"
 
   create_table "workspaces", :force => true do |t|
     t.string   "name"

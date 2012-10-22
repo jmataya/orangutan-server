@@ -6,6 +6,7 @@ describe Workspace do
 
   it { should respond_to(:name) }
   it { should respond_to(:description) }
+  it { should respond_to(:tasks) }
   it { should be_valid }
 
   describe "name is empty" do
@@ -48,6 +49,19 @@ describe Workspace do
 
     it "should have the user linked to it" do
       @workspace.users.should == [user]
+    end
+  end
+
+  describe "adding a task" do
+    let(:task) { FactoryGirl.create(:task) }
+
+    before do
+      @workspace.save
+      @workspace.workspace_task_relationships.create!(task_id: task.id)
+    end
+
+    it "should have the new task" do
+      @workspace.tasks.should == [task]
     end
   end
 end
